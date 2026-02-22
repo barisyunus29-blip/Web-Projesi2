@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kayıt Ol - Araba Parçaları Mağazası</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
+    <link rel="stylesheet" href="/Web-Projesi2/register.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="/index.html" class="logo">ARABA PARÇALARI</a>
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
+                
                 <nav class="nav">
-                    <a href="/products.html">ÜRÜNLER</a>
-                    <a href="/contact.html">İLETİŞİM</a>
-                    <a href="/cart.html">SEPETİM</a>
-                    <a href="/login.html">GİRİŞ YAP</a>
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
                 </nav>
             </div>
         </div>
@@ -25,40 +27,44 @@
 
     <div class="divider"></div>
 
-    <div class="container" style="padding: 4rem 0; max-width: 500px;">
-        <h1 style="text-align: center; margin-bottom: 3rem;">KAYIT OL</h1>
-        
-        <form id="register-form" style="border: 2px solid #fff; padding: 2rem;">
-            <div class="form-group">
-                <label for="name">AD SOYAD</label>
-                <input type="text" id="name" name="name" required>
-            </div>
+    <!-- Kayıt Formu -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 500px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">KAYIT OL</h1>
             
-            <div class="form-group">
-                <label for="email">E-POSTA</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">ŞİFRE</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password-confirm">ŞİFRE ONAYLA</label>
-                <input type="password" id="password-confirm" name="password-confirm" required>
-            </div>
-            
-            <button type="submit" class="btn btn-block">KAYIT OL</button>
-        </form>
-        
-        <p style="text-align: center; margin-top: 2rem;">
-            Zaten hesabınız var mı? <a href="/login.html">Giriş yapın</a>
-        </p>
-    </div>
+            <form id="register-form" style="border: 2px solid #fff; padding: 2rem;">
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Ad Soyad:</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email:</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="password" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Şifre:</label>
+                    <input type="password" id="password" name="password" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="password-confirm" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Şifre Tekrar:</label>
+                    <input type="password" id="password-confirm" name="password-confirm" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <button type="submit" class="btn btn-block" style="margin-bottom: 1rem;">KAYIT OL</button>
+                
+                <p style="text-align: center;">
+                    Zaten hesabınız var mı? <a href="/Web-Projesi2/login.html" style="color: #ff0000; text-decoration: none;">Giriş Yap</a>
+                </p>
+            </form>
+        </div>
+    </section>
 
     <div class="divider"></div>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -69,10 +75,10 @@
                 <div class="footer-section">
                     <h3>KATEGORİLER</h3>
                     <ul>
-                        <li><a href="/products.html">Motor Parçaları</a></li>
-                        <li><a href="/products.html">Fren Sistemi</a></li>
-                        <li><a href="/products.html">Elektrik Sistemi</a></li>
-                        <li><a href="/products.html">Süspansiyon</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -81,6 +87,7 @@
                         <li>Email: info@arabaparçalari.com</li>
                         <li>Telefon: +90 (555) 123-4567</li>
                         <li>Adres: İstanbul, Türkiye</li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
                     </ul>
                 </div>
             </div>
@@ -90,7 +97,30 @@
         </div>
     </footer>
 
-    <script src="/js/script.js"></script>
-    <script src="/js/register.js"></script>
+    <script src="/Web-Projesi2/script.js"></script>
+    <script src="/Web-Projesi2/register.js"></script>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const passwordConfirm = document.getElementById('password-confirm').value;
+            
+            if (password !== passwordConfirm) {
+                showNotification('Şifreler eşleşmiyor!', 'error');
+                return;
+            }
+            
+            const success = await register(email, password, passwordConfirm, name);
+            
+            if (success) {
+                setTimeout(() => {
+                    window.location.href = '/Web-Projesi2/login.html';
+                }, 1500);
+            }
+        });
+    </script>
 </body>
 </html>
