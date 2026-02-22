@@ -39,7 +39,8 @@
             
             <div style="border: 2px solid #fff; padding: 2rem; text-align: right;">
                 <h2 style="margin-bottom: 1rem;">Toplam: <span id="cart-total" style="color: #ff0000;">₺0.00</span></h2>
-                <a href="/Web-Projesi2/checkout.html" class="btn" style="display: inline-block;">KASA GİT</a>
+                <a href="/Web-Projesi2/checkout.html" class="btn" style="display: inline-block; padding: 0.75rem 2rem; background: #000; color: #fff; border: 2px solid #ff0000; font-weight: bold; text-decoration: none; cursor: pointer;">KASA GİT</a>
+                <a href="/Web-Projesi2/products.html" class="btn" style="display: inline-block; padding: 0.75rem 2rem; background: #000; color: #fff; border: 2px solid #fff; font-weight: bold; text-decoration: none; cursor: pointer; margin-left: 1rem;">ALIŞVERIŞE DEVAM ET</a>
             </div>
         </div>
     </section>
@@ -84,40 +85,54 @@
         async function loadCartPage() {
             if (!currentUser) {
                 showNotification('Lütfen giriş yapın', 'warning');
-                window.location.href = '/Web-Projesi2/login.html';
+                setTimeout(() => {
+                    window.location.href = '/Web-Projesi2/login.html';
+                }, 1500);
                 return;
             }
             
-            const cart = await loadCart();
+            const cartData = await loadCart();
             const container = document.getElementById('cart-items');
             
-            if (cart && cart.items && cart.items.length > 0) {
-                let total = 0;
-                const html = cart.items.map(item => {
-                    total += item.price * item.quantity;
-                    return `
-                        <div style="border: 2px solid #fff; padding: 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
-                            <div style="flex: 1;">
-                                <h3>${item.name}</h3>
-                                <p>Fiyat: ${formatPrice(item.price)}</p>
-                                <div style="display: flex; gap: 0.5rem; align-items: center;">
-                                    <label>Miktar:</label>
-                                    <input type="number" value="${item.quantity}" min="1" onchange="updateCartItem(${item.cart_id}, this.value)" style="width: 60px; padding: 0.5rem; background: #000; color: #fff; border: 2px solid #fff;">
-                                </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <p style="font-size: 1.3rem; margin-bottom: 1rem;">Toplam: ${formatPrice(item.price * item.quantity)}</p>
-                                <button onclick="removeFromCart(${item.cart_id})" class="btn" style="background: #ff0000;">SİL</button>
+            if (cartData && cartData.items && cartData.items.length > 0) {
+                const html = cartData.items.map(item => `
+                    <div style="border: 2px solid #fff; padding: 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0.5rem;">${item.name}</h3>
+                            <p style="margin-bottom: 0.5rem;">Birim Fiyat: <strong>${formatPrice(item.price)}</strong></p>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <label style="font-weight: bold;">Miktar:</label>
+                                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)" style="width: 70px; padding: 0.5rem; background: #000; color: #fff; border: 2px solid #fff; font-weight: bold;">
                             </div>
                         </div>
-                    `;
-                }).join('');
+                        <div style="text-align: right; min-width: 200px;">
+                            <p style="font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">Toplam: ${formatPrice(item.price * item.quantity)}</p>
+                            <button onclick="removeItem(${item.id})" style="padding: 0.75rem 1.5rem; background: #ff0000; color: #fff; border: 2px solid #ff0000; font-weight: bold; cursor: pointer; font-size: 1rem;">SİL</button>
+                        </div>
+                    </div>
+                `).join('');
                 
                 container.innerHTML = html;
-                document.getElementById('cart-total').textContent = formatPrice(total);
+                document.getElementById('cart-total').textContent = formatPrice(cartData.total);
             } else {
-                container.innerHTML = '<p style="color: #fff; font-size: 1.2rem; text-align: center;">Sepetiniz boş</p>';
+                container.innerHTML = `
+                    <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
+                        <p style="color: #fff; font-size: 1.3rem; margin-bottom: 1rem;">Sepetiniz boş</p>
+                        <a href="/Web-Projesi2/products.html" class="btn" style="display: inline-block; padding: 0.75rem 2rem; background: #000; color: #fff; border: 2px solid #fff; font-weight: bold; text-decoration: none; cursor: pointer;">ÜRÜNLERE GÖZ AT</a>
+                    </div>
+                `;
+                document.getElementById('cart-total').textContent = '₺0.00';
             }
+        }
+        
+        async function removeItem(productId) {
+            await removeFromCart(productId);
+            loadCartPage();
+        }
+        
+        async function updateQuantity(productId, quantity) {
+            await updateCartItem(productId, quantity);
+            loadCartPage();
         }
         
         window.addEventListener('load', loadCartPage);
