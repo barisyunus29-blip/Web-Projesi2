@@ -1,8 +1,9 @@
 /**
  * Araba Parçaları E-Ticaret Web Sitesi - Global JavaScript
+ * GitHub Pages için düzeltilmiş versiyon
  */
 
-const API_URL = '';
+const API_URL = '/Web-Projesi2/';
 
 let currentUser = null;
 
@@ -95,12 +96,12 @@ function handleSearch(e) {
     const query = document.getElementById('search-input').value.trim();
     
     if (query) {
-        window.location.href = `/products.html?search=${encodeURIComponent(query)}`;
+        window.location.href = `/Web-Projesi2/products.html?search=${encodeURIComponent(query)}`;
     }
 }
 
 async function login(email, password) {
-    const result = await apiCall('/api-users.php?action=login', 'POST', {
+    const result = await apiCall('api-users.php?action=login', 'POST', {
         email: email,
         password: password
     });
@@ -118,7 +119,7 @@ async function login(email, password) {
 }
 
 async function register(email, password, passwordConfirm, name) {
-    const result = await apiCall('/api-users.php?action=register', 'POST', {
+    const result = await apiCall('api-users.php?action=register', 'POST', {
         email: email,
         password: password,
         password_confirm: passwordConfirm,
@@ -135,7 +136,7 @@ async function register(email, password, passwordConfirm, name) {
 }
 
 async function logout() {
-    const result = await apiCall('/api-users.php?action=logout', 'POST');
+    const result = await apiCall('api-users.php?action=logout', 'POST');
     
     if (result && result.success) {
         currentUser = null;
@@ -143,18 +144,18 @@ async function logout() {
         updateUserUI();
         showNotification('Çıkış başarılı', 'success');
         setTimeout(() => {
-            window.location.href = '/index.html';
+            window.location.href = '/Web-Projesi2/index.html';
         }, 1000);
     }
 }
 
 async function loadProducts(page = 1, categoryId = null, search = null) {
-    let endpoint = `/api-products.php?action=list&page=${page}`;
+    let endpoint = `api-products.php?action=list&page=${page}`;
     
     if (categoryId) {
-        endpoint = `/api-products.php?action=by_category&category_id=${categoryId}&page=${page}`;
+        endpoint = `api-products.php?action=by_category&category_id=${categoryId}&page=${page}`;
     } else if (search) {
-        endpoint = `/api-products.php?action=search&query=${encodeURIComponent(search)}`;
+        endpoint = `api-products.php?action=search&query=${encodeURIComponent(search)}`;
     }
     
     const result = await apiCall(endpoint);
@@ -167,7 +168,7 @@ async function loadProducts(page = 1, categoryId = null, search = null) {
 }
 
 async function loadProductDetail(productId) {
-    const result = await apiCall(`/api-products.php?action=get&id=${productId}`);
+    const result = await apiCall(`api-products.php?action=get&id=${productId}`);
     
     if (result && result.success) {
         return result.data;
@@ -177,7 +178,7 @@ async function loadProductDetail(productId) {
 }
 
 async function loadCategories() {
-    const result = await apiCall('/api-products.php?action=categories');
+    const result = await apiCall('api-products.php?action=categories');
     
     if (result && result.success) {
         return result.data.categories;
@@ -187,7 +188,7 @@ async function loadCategories() {
 }
 
 async function loadFeaturedProducts() {
-    const result = await apiCall('/api-products.php?action=featured');
+    const result = await apiCall('api-products.php?action=featured');
     
     if (result && result.success) {
         return result.data.products;
@@ -199,11 +200,11 @@ async function loadFeaturedProducts() {
 async function addToCart(productId, quantity = 1) {
     if (!currentUser) {
         showNotification('Lütfen önce giriş yapın', 'warning');
-        window.location.href = '/login.html';
+        window.location.href = '/Web-Projesi2/login.html';
         return false;
     }
     
-    const result = await apiCall('/api-cart.php?action=add', 'POST', {
+    const result = await apiCall('api-cart.php?action=add', 'POST', {
         product_id: productId,
         quantity: quantity
     });
@@ -221,136 +222,3 @@ async function loadCart() {
     if (!currentUser) {
         return null;
     }
-    
-    const result = await apiCall('/api-cart.php?action=list');
-    
-    if (result && result.success) {
-        return result.data;
-    }
-    
-    return null;
-}
-
-async function removeFromCart(cartId) {
-    const result = await apiCall('/api-cart.php?action=remove', 'POST', {
-        cart_id: cartId
-    });
-    
-    if (result && result.success) {
-        showNotification('Ürün sepetten çıkarıldı', 'success');
-        return true;
-    } else {
-        showNotification(result?.message || 'İşlem başarısız', 'error');
-        return false;
-    }
-}
-
-async function updateCartItem(cartId, quantity) {
-    const result = await apiCall('/api-cart.php?action=update', 'POST', {
-        cart_id: cartId,
-        quantity: quantity
-    });
-    
-    if (result && result.success) {
-        return true;
-    } else {
-        showNotification(result?.message || 'İşlem başarısız', 'error');
-        return false;
-    }
-}
-
-async function createOrder(shippingAddress, shippingCity, shippingPostalCode, paymentMethod = 'credit_card', notes = '') {
-    if (!currentUser) {
-        showNotification('Lütfen giriş yapın', 'warning');
-        return false;
-    }
-    
-    const result = await apiCall('/api-orders.php?action=create', 'POST', {
-        shipping_address: shippingAddress,
-        shipping_city: shippingCity,
-        shipping_postal_code: shippingPostalCode,
-        payment_method: paymentMethod,
-        notes: notes
-    });
-    
-    if (result && result.success) {
-        showNotification('Sipariş başarıyla oluşturuldu!', 'success');
-        return result.data;
-    } else {
-        showNotification(result?.message || 'Sipariş oluşturulamadı', 'error');
-        return false;
-    }
-}
-
-async function loadOrders(page = 1) {
-    if (!currentUser) {
-        return null;
-    }
-    
-    const result = await apiCall(`/api-orders.php?action=list&page=${page}`);
-    
-    if (result && result.success) {
-        return result.data;
-    }
-    
-    return null;
-}
-
-async function submitContactForm(name, email, phone, subject, message) {
-    const result = await apiCall('/api-contact.php?action=submit', 'POST', {
-        name: name,
-        email: email,
-        phone: phone,
-        subject: subject,
-        message: message
-    });
-    
-    if (result && result.success) {
-        showNotification('Mesajınız başarıyla gönderildi!', 'success');
-        return true;
-    } else {
-        showNotification(result?.message || 'Mesaj gönderilemedi', 'error');
-        return false;
-    }
-}
-
-function formatPrice(price) {
-    return new Intl.NumberFormat('tr-TR', {
-        style: 'currency',
-        currency: 'TRY'
-    }).format(price);
-}
-
-function createProductCard(product) {
-    return `
-        <div class="product-card">
-            <div class="product-image">
-                <img src="${product.image_url || '/placeholder.jpg'}" alt="${product.name}">
-            </div>
-            <div class="product-info">
-                <div class="product-name">${product.name}</div>
-                <div class="product-price">${formatPrice(product.price)}</div>
-                <div class="product-stock">
-                    ${product.stock > 0 ? `Stokta: ${product.stock}` : 'Tükendi'}
-                </div>
-                <p class="product-description">${product.description?.substring(0, 100) || ''}...</p>
-                <button class="btn btn-small btn-block" onclick="addToCart(${product.id})">SEPETE EKLE</button>
-            </div>
-        </div>
-    `;
-}
-
-function getPageNumber() {
-    const params = new URLSearchParams(window.location.search);
-    return parseInt(params.get('page')) || 1;
-}
-
-function getCategoryId() {
-    const params = new URLSearchParams(window.location.search);
-    return parseInt(params.get('category')) || null;
-}
-
-function getSearchQuery() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('search') || null;
-}
