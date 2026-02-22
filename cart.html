@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepet - Araba Parçaları Mağazası</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/index.html" class="logo">ARABA PARÇALARI</a>
+                
+                <nav class="nav">
+                    <a href="/products.html">ÜRÜNLER</a>
+                    <a href="/contact.html">İLETİŞİM</a>
+                    <a href="/cart.html">SEPETİM</a>
+                    <a href="/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <div id="user-menu" style="display: none;">
+                        <span id="user-name"></span>
+                        <a href="#" id="logout-btn">ÇIKIŞ</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <div class="container" style="padding: 2rem 0;">
+        <h1 style="margin-bottom: 2rem;">SEPETİM</h1>
+        
+        <div id="empty-cart" style="text-align: center; padding: 3rem;">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Sepetiniz boş</p>
+            <a href="/products.html" class="btn">ÜRÜNLERE GÖZ AT</a>
+        </div>
+        
+        <div id="cart-content" style="display: none;">
+            <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem;">
+                <!-- Sepet Öğeleri -->
+                <div>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #fff;">
+                                <th style="text-align: left; padding: 1rem;">ÜRÜN</th>
+                                <th style="text-align: center; padding: 1rem;">FİYAT</th>
+                                <th style="text-align: center; padding: 1rem;">MİKTAR</th>
+                                <th style="text-align: right; padding: 1rem;">TOPLAM</th>
+                                <th style="text-align: center; padding: 1rem;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items"></tbody>
+                    </table>
+                </div>
+                
+                <!-- Özet -->
+                <div style="border: 2px solid #fff; padding: 2rem; height: fit-content;">
+                    <h3 style="margin-bottom: 1.5rem;">ÖZET</h3>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #666;">
+                        <span>Ara Toplam:</span>
+                        <span id="subtotal">0 ₺</span>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; font-size: 1.2rem; font-weight: 700;">
+                        <span>TOPLAM:</span>
+                        <span id="total">0 ₺</span>
+                    </div>
+                    
+                    <a href="/checkout.html" class="btn btn-block">KASAYA GİT</a>
+                    <a href="/products.html" class="btn btn-secondary btn-block" style="margin-top: 1rem;">ALIŞVERİŞE DEVAM ET</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ARABA PARÇALARI</h3>
+                    <p>Yüksek kaliteli araba parçaları ve aksesuarları için güvenilir kaynağınız.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>KATEGORİLER</h3>
+                    <ul>
+                        <li><a href="/products.html">Motor Parçaları</a></li>
+                        <li><a href="/products.html">Fren Sistemi</a></li>
+                        <li><a href="/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/products.html">Süspansiyon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İLETİŞİM</h3>
+                    <ul>
+                        <li>Email: info@arabaparçalari.com</li>
+                        <li>Telefon: +90 (555) 123-4567</li>
+                        <li>Adres: İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Araba Parçaları Mağazası. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script>
+        async function displayCart() {
+            if (!currentUser) {
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            const cart = await loadCart();
+            
+            if (!cart || cart.items.length === 0) {
+                document.getElementById('empty-cart').style.display = 'block';
+                document.getElementById('cart-content').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('empty-cart').style.display = 'none';
+            document.getElementById('cart-content').style.display = 'block';
+            
+            const tbody = document.getElementById('cart-items');
+            tbody.innerHTML = cart.items.map(item => `
+                <tr style="border-bottom: 1px solid #666;">
+                    <td style="padding: 1rem;">${item.name}</td>
+                    <td style="text-align: center; padding: 1rem;">${formatPrice(item.price)}</td>
+                    <td style="text-align: center; padding: 1rem;">
+                        <input type="number" value="${item.quantity}" min="1" max="${item.stock}" 
+                            onchange="updateQuantity(${item.id}, this.value)" 
+                            style="width: 60px; padding: 0.25rem; text-align: center; background-color: #000; color: #fff; border: 1px solid #fff;">
+                    </td>
+                    <td style="text-align: right; padding: 1rem;">${formatPrice(item.subtotal)}</td>
+                    <td style="text-align: center; padding: 1rem;">
+                        <button class="btn btn-small" onclick="removeItem(${item.id})">SİL</button>
+                    </td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('subtotal').textContent = formatPrice(cart.total);
+            document.getElementById('total').textContent = formatPrice(cart.total);
+        }
+        
+        async function updateQuantity(cartId, quantity) {
+            quantity = parseInt(quantity);
+            if (quantity <= 0) return;
+            
+            await updateCartItem(cartId, quantity);
+            displayCart();
+        }
+        
+        async function removeItem(cartId) {
+            if (confirm('Ürünü sepetten çıkarmak istediğinize emin misiniz?')) {
+                await removeFromCart(cartId);
+                displayCart();
+            }
+        }
+        
+        window.addEventListener('load', displayCart);
+    </script>
+</body>
+</html>
