@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kasa - Araba Parçaları Mağazası</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="/index.html" class="logo">ARABA PARÇALARI</a>
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
                 
                 <nav class="nav">
-                    <a href="/products.html">ÜRÜNLER</a>
-                    <a href="/contact.html">İLETİŞİM</a>
-                    <a href="/cart.html">SEPETİM</a>
-                    <a href="/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
                     <div id="user-menu" style="display: none;">
                         <span id="user-name"></span>
                         <a href="#" id="logout-btn">ÇIKIŞ</a>
@@ -29,75 +30,51 @@
 
     <div class="divider"></div>
 
-    <div class="container" style="padding: 2rem 0;">
-        <h1 style="margin-bottom: 2rem;">KASA</h1>
-        
-        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem;">
-            <!-- Form -->
-            <div>
-                <form id="checkout-form" style="border: 2px solid #fff; padding: 2rem;">
-                    <h3 style="margin-bottom: 1.5rem;">KARGO BİLGİLERİ</h3>
-                    
-                    <div class="form-group">
-                        <label for="address">ADRES</label>
-                        <textarea id="address" name="address" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="city">ŞEHİR</label>
-                        <input type="text" id="city" name="city" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="postal">POSTA KODU</label>
-                        <input type="text" id="postal" name="postal" required>
-                    </div>
-                    
-                    <div class="divider"></div>
-                    
-                    <h3 style="margin-bottom: 1.5rem;">ÖDEME YÖNTEMİ</h3>
-                    
-                    <div class="form-group">
-                        <label for="payment">ÖDEME YÖNTEMİ</label>
-                        <select id="payment" name="payment">
-                            <option value="credit_card">Kredi Kartı</option>
-                            <option value="bank_transfer">Banka Transferi</option>
-                            <option value="cash_on_delivery">Kapıda Ödeme</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="notes">NOTLAR (İSTEĞE BAĞLI)</label>
-                        <textarea id="notes" name="notes"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-block">SİPARİŞ OLUŞTUR</button>
-                </form>
-            </div>
+    <!-- Kasa -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 600px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">KASA</h1>
             
-            <!-- Özet -->
-            <div style="border: 2px solid #fff; padding: 2rem; height: fit-content;">
-                <h3 style="margin-bottom: 1.5rem;">ÖZET</h3>
+            <form id="checkout-form" style="border: 2px solid #fff; padding: 2rem;">
+                <h2 style="margin-bottom: 1.5rem;">Teslimat Bilgileri</h2>
                 
-                <div id="order-items" style="margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto;"></div>
-                
-                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #666;">
-                    <span>Ara Toplam:</span>
-                    <span id="subtotal">0 ₺</span>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="address" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Adres:</label>
+                    <input type="text" id="address" name="address" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
                 </div>
                 
-                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; font-size: 1.2rem; font-weight: 700;">
-                    <span>TOPLAM:</span>
-                    <span id="total">0 ₺</span>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="city" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Şehir:</label>
+                    <input type="text" id="city" name="city" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
                 </div>
                 
-                <a href="/cart.html" class="btn btn-secondary btn-block">SEPETİ DÜZENLE</a>
-            </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="postal-code" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Posta Kodu:</label>
+                    <input type="text" id="postal-code" name="postal-code" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="payment-method" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Ödeme Yöntemi:</label>
+                    <select id="payment-method" name="payment-method" style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                        <option value="credit_card">Kredi Kartı</option>
+                        <option value="bank_transfer">Banka Transferi</option>
+                        <option value="cash_on_delivery">Kapıda Ödeme</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="notes" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Notlar:</label>
+                    <textarea id="notes" name="notes" style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box; min-height: 100px;"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-block">SİPARİŞ VER</button>
+            </form>
         </div>
-    </div>
+    </section>
 
     <div class="divider"></div>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -108,10 +85,10 @@
                 <div class="footer-section">
                     <h3>KATEGORİLER</h3>
                     <ul>
-                        <li><a href="/products.html">Motor Parçaları</a></li>
-                        <li><a href="/products.html">Fren Sistemi</a></li>
-                        <li><a href="/products.html">Elektrik Sistemi</a></li>
-                        <li><a href="/products.html">Süspansiyon</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -120,6 +97,7 @@
                         <li>Email: info@arabaparçalari.com</li>
                         <li>Telefon: +90 (555) 123-4567</li>
                         <li>Adres: İstanbul, Türkiye</li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
                     </ul>
                 </div>
             </div>
@@ -129,60 +107,31 @@
         </div>
     </footer>
 
-    <script src="/js/script.js"></script>
+    <script src="/Web-Projesi2/script.js"></script>
     <script>
-        async function loadCheckoutData() {
-            if (!currentUser) {
-                window.location.href = '/login.html';
-                return;
-            }
-            
-            const cart = await loadCart();
-            
-            if (!cart || cart.items.length === 0) {
-                window.location.href = '/cart.html';
-                return;
-            }
-            
-            const itemsDiv = document.getElementById('order-items');
-            itemsDiv.innerHTML = cart.items.map(item => `
-                <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #666;">
-                    <div style="display: flex; justify-content: space-between;">
-                        <span>${item.name}</span>
-                        <span>${item.quantity}x</span>
-                    </div>
-                    <div style="text-align: right; color: #ff0000;">${formatPrice(item.subtotal)}</div>
-                </div>
-            `).join('');
-            
-            document.getElementById('subtotal').textContent = formatPrice(cart.total);
-            document.getElementById('total').textContent = formatPrice(cart.total);
-        }
-        
         document.getElementById('checkout-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const address = document.getElementById('address').value.trim();
-            const city = document.getElementById('city').value.trim();
-            const postal = document.getElementById('postal').value.trim();
-            const payment = document.getElementById('payment').value;
-            const notes = document.getElementById('notes').value.trim();
-            
-            if (!address || !city || !postal) {
-                showNotification('Lütfen tüm kargo bilgilerini doldurun', 'error');
+            if (!currentUser) {
+                showNotification('Lütfen giriş yapın', 'warning');
+                window.location.href = '/Web-Projesi2/login.html';
                 return;
             }
             
-            const result = await createOrder(address, city, postal, payment, notes);
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const postalCode = document.getElementById('postal-code').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+            const notes = document.getElementById('notes').value;
             
-            if (result) {
+            const order = await createOrder(address, city, postalCode, paymentMethod, notes);
+            
+            if (order) {
                 setTimeout(() => {
-                    window.location.href = '/index.html';
+                    window.location.href = '/Web-Projesi2/index.html';
                 }, 2000);
             }
         });
-        
-        window.addEventListener('load', loadCheckoutData);
     </script>
 </body>
 </html>
