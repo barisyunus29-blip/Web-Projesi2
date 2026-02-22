@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>İletişim - Araba Parçaları Mağazası</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="/index.html" class="logo">ARABA PARÇALARI</a>
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
                 
                 <nav class="nav">
-                    <a href="/products.html">ÜRÜNLER</a>
-                    <a href="/contact.html">İLETİŞİM</a>
-                    <a href="/cart.html">SEPETİM</a>
-                    <a href="/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
                     <div id="user-menu" style="display: none;">
                         <span id="user-name"></span>
                         <a href="#" id="logout-btn">ÇIKIŞ</a>
@@ -29,68 +30,71 @@
 
     <div class="divider"></div>
 
-    <div class="container" style="padding: 4rem 0;">
-        <h1 style="text-align: center; margin-bottom: 3rem;">İLETİŞİM</h1>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
-            <!-- İletişim Bilgileri -->
-            <div>
-                <h3 style="margin-bottom: 1.5rem;">BİZE ULAŞIN</h3>
-                
-                <div style="border: 2px solid #fff; padding: 2rem; margin-bottom: 1rem;">
-                    <h4 style="margin-bottom: 0.5rem;">E-POSTA</h4>
-                    <p><a href="mailto:info@arabaparçalari.com">info@arabaparçalari.com</a></p>
-                </div>
-                
-                <div style="border: 2px solid #fff; padding: 2rem; margin-bottom: 1rem;">
-                    <h4 style="margin-bottom: 0.5rem;">TELEFON</h4>
-                    <p><a href="tel:+905551234567">+90 (555) 123-4567</a></p>
-                </div>
-                
-                <div style="border: 2px solid #fff; padding: 2rem;">
-                    <h4 style="margin-bottom: 0.5rem;">ADRES</h4>
-                    <p>İstanbul, Türkiye</p>
-                </div>
-            </div>
+    <!-- İletişim -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 600px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">İLETİŞİM</h1>
             
-            <!-- İletişim Formu -->
-            <div>
-                <h3 style="margin-bottom: 1.5rem;">MESAJ GÖNDERIN</h3>
+            <form id="contact-form" style="border: 2px solid #fff; padding: 2rem;">
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Ad Soyad:</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
                 
-                <form id="contact-form" style="border: 2px solid #fff; padding: 2rem;">
-                    <div class="form-group">
-                        <label for="name">AD SOYAD</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">E-POSTA</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">TELEFON</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subject">KONU</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">MESAJ</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-block">GÖNDER</button>
-                </form>
-            </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email:</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="phone" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Telefon:</label>
+                    <input type="tel" id="phone" name="phone" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="subject" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Konu:</label>
+                    <input type="text" id="subject" name="subject" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Mesaj:</label>
+                    <textarea id="message" name="message" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box; min-height: 150px;"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-block">GÖNDER</button>
+            </form>
         </div>
-    </div>
+    </section>
 
     <div class="divider"></div>
 
+    <!-- İletişim Bilgileri -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">BİZE ULAŞIN</h2>
+            
+            <div class="grid grid-3">
+                <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">EMAIL</h3>
+                    <p><a href="mailto:info@arabaparçalari.com" style="color: #ff0000; text-decoration: none;">info@arabaparçalari.com</a></p>
+                </div>
+                
+                <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">TELEFON</h3>
+                    <p><a href="tel:+905551234567" style="color: #ff0000; text-decoration: none;">+90 (555) 123-4567</a></p>
+                </div>
+                
+                <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
+                    <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">ADRES</h3>
+                    <p>İstanbul, Türkiye</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -101,10 +105,10 @@
                 <div class="footer-section">
                     <h3>KATEGORİLER</h3>
                     <ul>
-                        <li><a href="/products.html">Motor Parçaları</a></li>
-                        <li><a href="/products.html">Fren Sistemi</a></li>
-                        <li><a href="/products.html">Elektrik Sistemi</a></li>
-                        <li><a href="/products.html">Süspansiyon</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -113,6 +117,7 @@
                         <li>Email: info@arabaparçalari.com</li>
                         <li>Telefon: +90 (555) 123-4567</li>
                         <li>Adres: İstanbul, Türkiye</li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
                     </ul>
                 </div>
             </div>
@@ -122,26 +127,24 @@
         </div>
     </footer>
 
-    <script src="/js/script.js"></script>
+    <script src="/Web-Projesi2/script.js"></script>
     <script>
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const subject = document.getElementById('subject').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            if (!name || !email || !subject || !message) {
-                showNotification('Lütfen gerekli alanları doldurun', 'error');
-                return;
-            }
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
             
             const success = await submitContactForm(name, email, phone, subject, message);
             
             if (success) {
                 document.getElementById('contact-form').reset();
+                setTimeout(() => {
+                    window.location.href = '/Web-Projesi2/index.html';
+                }, 2000);
             }
         });
     </script>
