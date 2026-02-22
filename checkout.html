@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasa - Araba Parçaları Mağazası</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/index.html" class="logo">ARABA PARÇALARI</a>
+                
+                <nav class="nav">
+                    <a href="/products.html">ÜRÜNLER</a>
+                    <a href="/contact.html">İLETİŞİM</a>
+                    <a href="/cart.html">SEPETİM</a>
+                    <a href="/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <div id="user-menu" style="display: none;">
+                        <span id="user-name"></span>
+                        <a href="#" id="logout-btn">ÇIKIŞ</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <div class="container" style="padding: 2rem 0;">
+        <h1 style="margin-bottom: 2rem;">KASA</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem;">
+            <!-- Form -->
+            <div>
+                <form id="checkout-form" style="border: 2px solid #fff; padding: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem;">KARGO BİLGİLERİ</h3>
+                    
+                    <div class="form-group">
+                        <label for="address">ADRES</label>
+                        <textarea id="address" name="address" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="city">ŞEHİR</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="postal">POSTA KODU</label>
+                        <input type="text" id="postal" name="postal" required>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <h3 style="margin-bottom: 1.5rem;">ÖDEME YÖNTEMİ</h3>
+                    
+                    <div class="form-group">
+                        <label for="payment">ÖDEME YÖNTEMİ</label>
+                        <select id="payment" name="payment">
+                            <option value="credit_card">Kredi Kartı</option>
+                            <option value="bank_transfer">Banka Transferi</option>
+                            <option value="cash_on_delivery">Kapıda Ödeme</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">NOTLAR (İSTEĞE BAĞLI)</label>
+                        <textarea id="notes" name="notes"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-block">SİPARİŞ OLUŞTUR</button>
+                </form>
+            </div>
+            
+            <!-- Özet -->
+            <div style="border: 2px solid #fff; padding: 2rem; height: fit-content;">
+                <h3 style="margin-bottom: 1.5rem;">ÖZET</h3>
+                
+                <div id="order-items" style="margin-bottom: 1.5rem; max-height: 300px; overflow-y: auto;"></div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #666;">
+                    <span>Ara Toplam:</span>
+                    <span id="subtotal">0 ₺</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 2rem; font-size: 1.2rem; font-weight: 700;">
+                    <span>TOPLAM:</span>
+                    <span id="total">0 ₺</span>
+                </div>
+                
+                <a href="/cart.html" class="btn btn-secondary btn-block">SEPETİ DÜZENLE</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ARABA PARÇALARI</h3>
+                    <p>Yüksek kaliteli araba parçaları ve aksesuarları için güvenilir kaynağınız.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>KATEGORİLER</h3>
+                    <ul>
+                        <li><a href="/products.html">Motor Parçaları</a></li>
+                        <li><a href="/products.html">Fren Sistemi</a></li>
+                        <li><a href="/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/products.html">Süspansiyon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İLETİŞİM</h3>
+                    <ul>
+                        <li>Email: info@arabaparçalari.com</li>
+                        <li>Telefon: +90 (555) 123-4567</li>
+                        <li>Adres: İstanbul, Türkiye</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Araba Parçaları Mağazası. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/script.js"></script>
+    <script>
+        async function loadCheckoutData() {
+            if (!currentUser) {
+                window.location.href = '/login.html';
+                return;
+            }
+            
+            const cart = await loadCart();
+            
+            if (!cart || cart.items.length === 0) {
+                window.location.href = '/cart.html';
+                return;
+            }
+            
+            const itemsDiv = document.getElementById('order-items');
+            itemsDiv.innerHTML = cart.items.map(item => `
+                <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #666;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>${item.name}</span>
+                        <span>${item.quantity}x</span>
+                    </div>
+                    <div style="text-align: right; color: #ff0000;">${formatPrice(item.subtotal)}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('subtotal').textContent = formatPrice(cart.total);
+            document.getElementById('total').textContent = formatPrice(cart.total);
+        }
+        
+        document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const address = document.getElementById('address').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const postal = document.getElementById('postal').value.trim();
+            const payment = document.getElementById('payment').value;
+            const notes = document.getElementById('notes').value.trim();
+            
+            if (!address || !city || !postal) {
+                showNotification('Lütfen tüm kargo bilgilerini doldurun', 'error');
+                return;
+            }
+            
+            const result = await createOrder(address, city, postal, payment, notes);
+            
+            if (result) {
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 2000);
+            }
+        });
+        
+        window.addEventListener('load', loadCheckoutData);
+    </script>
+</body>
+</html>
