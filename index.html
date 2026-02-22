@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Araba Parçaları Mağazası</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,13 +12,13 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="/index.html" class="logo">ARABA PARÇALARI</a>
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
                 
                 <nav class="nav">
-                    <a href="/products.html">ÜRÜNLER</a>
-                    <a href="/contact.html">İLETİŞİM</a>
-                    <a href="/cart.html">SEPETİM</a>
-                    <a href="/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
                     <div id="user-menu" style="display: none;">
                         <span id="user-name"></span>
                         <a href="#" id="logout-btn">ÇIKIŞ</a>
@@ -41,7 +41,7 @@
             <h1>ARABA PARÇALARI MAĞAZASI</h1>
             <p style="font-size: 1.2rem; margin: 1rem 0;">Kaliteli, Güvenilir, Hızlı Teslimat</p>
             <div class="divider"></div>
-            <a href="/products.html" class="btn" style="margin-top: 2rem;">ÜRÜNLERI KEŞFET</a>
+            <a href="/Web-Projesi2/products.html" class="btn" style="margin-top: 2rem;">ÜRÜNLERI KEŞFET</a>
         </div>
     </section>
 
@@ -99,10 +99,10 @@
                 <div class="footer-section">
                     <h3>KATEGORİLER</h3>
                     <ul>
-                        <li><a href="/products.html">Motor Parçaları</a></li>
-                        <li><a href="/products.html">Fren Sistemi</a></li>
-                        <li><a href="/products.html">Elektrik Sistemi</a></li>
-                        <li><a href="/products.html">Süspansiyon</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -111,7 +111,7 @@
                         <li>Email: info@arabaparçalari.com</li>
                         <li>Telefon: +90 (555) 123-4567</li>
                         <li>Adres: İstanbul, Türkiye</li>
-                        <li><a href="/contact.html">İletişim Formu</a></li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
                     </ul>
                 </div>
             </div>
@@ -121,7 +121,7 @@
         </div>
     </footer>
 
-    <script src="/js/script.js"></script>
+    <script src="/Web-Projesi2/script.js"></script>
     <script>
         async function loadCategoriesHome() {
             const categories = await loadCategories();
@@ -129,7 +129,7 @@
             
             if (categories && categories.length > 0) {
                 grid.innerHTML = categories.map(cat => `
-                    <a href="/products.html?category=${cat.id}" style="text-decoration: none;">
+                    <a href="/Web-Projesi2/products.html?category=${cat.id}" style="text-decoration: none;">
                         <div style="border: 2px solid #fff; padding: 2rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.borderColor='#ff0000'; this.style.backgroundColor='#111';" onmouseout="this.style.borderColor='#fff'; this.style.backgroundColor='transparent';">
                             <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">${cat.name}</h3>
                             <p>${cat.description || ''}</p>
